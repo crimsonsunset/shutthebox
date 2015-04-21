@@ -7,7 +7,6 @@
  */
 function diceRoller(diceId,diceElem) {
     var diceRoller = {};
-    var isBtnPressed = false;
     var shapeId, animationId, maxNumber, currClass, sideId, diceValue;
     var diceId = diceId;
     var diceElem = diceElem;
@@ -17,16 +16,14 @@ function diceRoller(diceId,diceElem) {
      * @return {integer} the value of the dice that was just rolled
      */
     diceRoller.roll = function () {
-        if (isBtnPressed === false) {
-            isBtnPressed = true;
             shapeId = "shape" + diceId;
             animationId = "animation" + diceId;
             maxNumber = diceId.substring(diceId.indexOf('D') + 1, diceId.indexOf('D') + 2);
             diceValue = randomNum(1, maxNumber);
             document.getElementById(shapeId).classList.add(animationId);
-            document.getElementById(shapeId).addEventListener('webkitAnimationEnd', showSide, false);
+            document.getElementById(shapeId).addEventListener('webkitAnimationEnd', showSide, false); //chrome
+            document.getElementById(shapeId).addEventListener('animationend', showSide, false); //firefox
             return diceValue;
-        }else{}
     }
 
     /**
@@ -54,7 +51,6 @@ function diceRoller(diceId,diceElem) {
         sideId = "show-side" + diceValue;
         document.getElementById(shapeId).classList.remove(currClass);
         document.getElementById(shapeId).classList.add(sideId);
-        isBtnPressed = false;
     }
 
     /**

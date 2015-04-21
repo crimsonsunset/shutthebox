@@ -69,9 +69,8 @@ var stb = (function () {
             $(elem).flip(true)
 
             //check for win, if every element of the takenCards obj is true
-            var didWin = Object.keys(takenCards).every(function(e){
-                return e == true
-            });
+            var didWin = Object.keys(takenCards).every(function(i){
+                return this[i] }, takenCards);
 
             //if win, take necessary action
             if (didWin) {
@@ -101,7 +100,7 @@ var stb = (function () {
         for (var i = 0; i < dice.length; i++) {
             rollTotal += dice[i].roll()
         }
-        console.log("ROLLTOTAL IS "+ rollTotal)
+        console.log("Roll Total is "+ rollTotal)
 
         var availCards=[]
         //populate an array that has the remaining [unflipped] cards
